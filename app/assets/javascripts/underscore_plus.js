@@ -455,8 +455,8 @@ _.pickWithPrefix = function(aObject,aPrefix) {
 	return result;
 };
 
-_.round = function(aNumber,aPrecision) {
-	var mult = Math.pow(10, aPrecision);
+_.round = function(aNumber,aDecimals) {
+	var mult = Math.pow(10, aDecimals);
 	return Math.round(aNumber*mult)/mult;
 };
 
