@@ -460,4 +460,30 @@ _.round = function(aNumber,aDecimals) {
 	return Math.round(aNumber*mult)/mult;
 };
 
+_.copyProperties = function(aDest,aSource,aProperties,aExclude) {
+	var p;
+	var v;
+	if (!aDest)
+		aDest = {};
+	if (aProperties && !_.isArray(aProperties))
+		aProperties = [aProperties];
+	if (aExclude && !_.isArray(aExclude))
+		aExclude = [aExclude];
+	if (aProperties) {
+		for (var i=0;i<aProperties.length;i++) {
+			p = aProperties[i];
+			if (aExclude && aExclude.indexOf(p)>=0)
+				continue;
+			if (p in aSource) aDest[p] = aSource[p];
+		}
+	} else {
+		for (p in aSource) {
+			if (aExclude && aExclude.indexOf(p)>=0)
+				continue;
+			if (p in aSource) aDest[p] = aSource[p];
+		}
+	}
+	return aDest;
+}
+
 }).call(this);
