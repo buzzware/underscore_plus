@@ -445,6 +445,8 @@ _.toBoolean = function(aValue,aDefault) {
 			if (t==="false" || t==="no" || t==="off")
 				return false;
 		}
+	} else if (_.isNumber(aValue)) {
+		return !!aValue;
 	}
 	return aDefault;
 };
