@@ -581,8 +581,8 @@ _.compactObject = function(aObject) {
 	var result = {}
 	_.each(aObject,function(v,k){
 		if ((v===null) || (v===undefined))
-			continue;
-		result[k] = v
+			return;
+		result[k] = v;
 	});
 	return result;
 };
