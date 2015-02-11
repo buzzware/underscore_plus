@@ -306,6 +306,16 @@ _.randomString = function (aLength, aCharSet) {
 	return result.join('');
 };
 
+_.extract = function(aString,aRegex) {
+	var matches = aRegex.exec(aString);
+	return matches && matches.length ? matches[0] : null;
+};
+
+_.NUMBER_REGEX = /[-+]?([0-9]*\.[0-9]+|[0-9]+)/;
+_.extractNumber = function(aString,aDefault) {
+	return _.toNumber(_.extract(aString,_.NUMBER_REGEX),aDefault);
+};
+
 _.formatNumber = function(aValue,aDecimals) {
 	if (aValue===null)
 		return '';
@@ -336,7 +346,7 @@ _.sum = function() {
 	_.formatCurrency = function(aNumber,aPrecision,aSymbol) {
 		if (!aPrecision)
 			aPrecision = 0;
-		if (!aSymbol)
+		if (!aSymbol && !_.isString(aSymbol))
 			aSymbol = '$';
 		return _.isFinite(aNumber) ? aSymbol+_.groupDigits(_.formatNumber(aNumber,aPrecision)) : '';
 	};
@@ -565,6 +575,16 @@ _.randomInt = function(aValues) {
 
 _.randomIntRange = function(aMin,aMax) {
 	return aMin + Math.floor(Math.random()*(aMax-aMin+1));
+};
+
+_.compactObject = function(aObject) {
+	var result = {}
+	_.each(aObject,function(v,k){
+		if ((v===null) || (v===undefined))
+			continue;
+		result[k] = v
+	});
+	return result;
 };
 
 }).call(this);
